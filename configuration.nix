@@ -77,6 +77,7 @@
     pkgs.btop
     pkgs.tree-sitter
     (vimPlugins.nvim-treesitter.withAllGrammars)
+    pkgs.lazygit
     git
     wget
     gcc
