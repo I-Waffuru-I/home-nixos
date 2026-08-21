@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./cloudflare.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -30,16 +31,20 @@
  time.timeZone = "Europe/Amsterdam";
 
   # Configure network proxy if necessary
+  networking = {
+    interfaces = {
+      enp2s0.ipv4.addresses = [{
+        address = "192.168.1.155";
+        prefixLength = 24;
+      }];
+    };
+    defaultGateway = {
+      address = "192.168.1.1";
+      interface = "enp2s0";
+    };
+  };
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
 
 
   # Enable CUPS to print documents.
@@ -59,13 +64,9 @@
     openssh.authorizedKeys.keys = [
 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOcV/4tvh8Poq0DJ1ZyvtmvDdc2U8+tWBCrds97sbnqf matha@vmatha"
     ];
+    shell = pkgs.fish;
   };
-  programs.ssh = {
-    extraConfig = ''
-      Host github.com
-        HostName github.com
-    '';
-  };
+  programs.fish.enable = true;
 
   # programs.firefox.enable = true;
 
@@ -74,10 +75,11 @@
   environment.systemPackages = with pkgs; [
     pkgs.neovim
     pkgs.btop
-    pkgs.vimPlugins.treesitter-modules-nvim
+    pkgs.tree-sitter
+    (vimPlugins.nvim-treesitter.withAllGrammars)
     git
-    vim
     wget
+    gcc
   ];
 
   programs.neovim = {
@@ -86,14 +88,6 @@
   };
 
 
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # List services that you want to enable:
 
