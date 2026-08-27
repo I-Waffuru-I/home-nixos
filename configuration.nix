@@ -66,7 +66,13 @@
     ];
     shell = pkgs.fish;
   };
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      v = nvim;
+      sv = "sudo -E nvim";
+    };
+  };
 
   # programs.firefox.enable = true;
 
@@ -107,7 +113,7 @@
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 2222 ];
+  # networking.firewall.allowedTCPPorts = [ 2222 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
