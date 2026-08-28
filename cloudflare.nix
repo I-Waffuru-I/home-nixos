@@ -15,7 +15,8 @@
      "ec822526-d905-458b-932c-1b7fe6ba6fde" = {
        credentialsFile = config.sops.secrets."cloudflared-tunnel-json".path;
        ingress = {
-         "ssh.waffuru.net" = "ssh://localhost:2222";
+          "ssh.waffuru.net" = "ssh://localhost:2222";
+          "www.waffuru.net" = "http://localhost:80";
        };
        default = "http_status:404";
      };

@@ -43,8 +43,16 @@
     wantedBy = [ "timers.target" ];
     timerConfig = {
       OnBootSec = "2min";
-      OnUnitActiveSec = "2h";
+      OnUnitActiveSec = "12h";
     };
   };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."www.waffuru.net" = {
+      root = "/var/www/web/waffsite/";
+    };
+  };
+
 
 }
