@@ -1,14 +1,12 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
       ./cloudflare.nix
+      ./secrets.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -22,15 +20,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
 
-  networking.hostName = "niksos"; # Define your hostname.
-
-  # Configure network connections interactively with nmcli or nmtui.
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
  time.timeZone = "Europe/Amsterdam";
 
-  # Configure network proxy if necessary
+  networking.hostName = "niksos"; # Define your hostname.
+  networking.networkmanager.enable = true;
   networking = {
     interfaces = {
       enp2s0.ipv4.addresses = [{
@@ -47,17 +40,6 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     tree
-  #   ];
-  # };
   users.users.matha = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -69,12 +51,12 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      v = nvim;
+      v = "nvim";
       sv = "sudo -E nvim";
+      lg = "lazygit";
     };
   };
 
-  # programs.firefox.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -93,7 +75,6 @@
     enable = true;
     defaultEditor = true;
   };
-
 
 
   # List services that you want to enable:
