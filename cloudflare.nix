@@ -4,6 +4,11 @@
     pkgs.cloudflared
   ];
 
+    sops.secrets."cloudflared-tunnel-json" = {
+      owner = "root";
+      mode = "0400";
+    };
+
   services.cloudflared = {
    enable = true;
    tunnels = {

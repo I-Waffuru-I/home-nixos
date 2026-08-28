@@ -7,7 +7,9 @@
       ./hardware-configuration.nix
       ./cloudflare.nix
       ./secrets.nix
+      ./services/nginx.nix
     ];
+  users.groups.gitdeploy = {};
 
   # Use the GRUB 2 boot loader.
   # boot.loader.grub.enable = true;
@@ -54,6 +56,7 @@
       v = "nvim";
       sv = "sudo -E nvim";
       lg = "lazygit";
+      y = "yazi";
     };
   };
 
@@ -66,6 +69,7 @@
     pkgs.tree-sitter
     (vimPlugins.nvim-treesitter.withAllGrammars)
     pkgs.lazygit
+    pkgs.yazi
     git
     wget
     gcc

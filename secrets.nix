@@ -14,10 +14,6 @@ in {
     defaultSopsFile = ./secrets/secrets.yaml;
     age.keyFile = "/opt/age/keys.txt";
 
-    secrets."cloudflared-tunnel-json" = {
-      owner = "root";
-      mode = "0400";
-    };
   };
 
 }
