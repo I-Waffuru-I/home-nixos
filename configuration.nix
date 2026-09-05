@@ -70,6 +70,7 @@
     (vimPlugins.nvim-treesitter.withAllGrammars)
     pkgs.lazygit
     pkgs.yazi
+    pkgs.kitty.terminfo
     git
     wget
     gcc

@@ -50,7 +50,8 @@
   services.nginx = {
     enable = true;
     virtualHosts."www.waffuru.net" = {
-      root = "/var/www/web/waffsite/";
+      #root = "/var/www/web/waffsite/";
+      root = "/var/www/web/waffsite/site";
     };
   };
 

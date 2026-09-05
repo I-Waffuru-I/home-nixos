@@ -17,6 +17,7 @@
        ingress = {
           "ssh.waffuru.net" = "ssh://localhost:2222";
           "www.waffuru.net" = "http://localhost:80";
+          "waffuru.net" = "http://localhost:80";
        };
        default = "http_status:404";
      };
