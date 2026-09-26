@@ -7,7 +7,7 @@
       ./hardware-configuration.nix
       ./cloudflare.nix
       ./secrets.nix
-      ./services/nginx.nix
+      ./services/waffsite.nix
     ];
   users.groups.gitdeploy = {};
 
@@ -44,7 +44,7 @@
 
   users.users.matha = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "gitdeploy" ];
     openssh.authorizedKeys.keys = [
 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOcV/4tvh8Poq0DJ1ZyvtmvDdc2U8+tWBCrds97sbnqf matha@vmatha"
     ];
@@ -71,6 +71,7 @@
     pkgs.lazygit
     pkgs.yazi
     pkgs.kitty.terminfo
+    pkgs.hwinfo
     git
     wget
     gcc
