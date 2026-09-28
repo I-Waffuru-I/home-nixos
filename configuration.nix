@@ -49,6 +49,9 @@
 	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOcV/4tvh8Poq0DJ1ZyvtmvDdc2U8+tWBCrds97sbnqf matha@vmatha"
     ];
     shell = pkgs.fish;
+    packages = [
+      pkgs.fastfetch
+    ];
   };
   programs.fish = {
     enable = true;
@@ -72,6 +75,7 @@
     pkgs.yazi
     pkgs.kitty.terminfo
     pkgs.hwinfo
+    pkgs.iperf3
     git
     wget
     gcc

@@ -1,13 +1,14 @@
 
 { config, pkgs, ... }: {
+
   environment.systemPackages = [
     pkgs.cloudflared
   ];
 
-    sops.secrets."cloudflared-tunnel-json" = {
-      owner = "root";
-      mode = "0400";
-    };
+  sops.secrets."cloudflared-tunnel-json" = {
+    owner = "root";
+    mode = "0400";
+  };
 
   services.cloudflared = {
    enable = true;
@@ -16,10 +17,11 @@
        credentialsFile = config.sops.secrets."cloudflared-tunnel-json".path;
        ingress = {
           "ssh.waffuru.net" = "ssh://localhost:2222";
-          "www.waffuru.net" = "http://localhost:80";
-          "waffuru.net" = "http://localhost:80";
+          "www.waffuru.net" = "http://localhost:8000";
+          "waffuru.net" = "http://localhost:8000";
        };
        default = "http_status:404";
+       warp-routing.enabled = true;
      };
    };
   };
